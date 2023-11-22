@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant</title>
+</head>
+<body>
+    <form>
+        <label for="Price">Choose Price:</label>
+        <input Type="number" id="Price" class="Price">
+        <label for="Dish">Choose Dish:</label>
+        <input Type="text" id="Dish" class="Dish">
+        <label for="Table">Choose Table:</label>
+        <select name="Category" id="Category" class="Category">
+            <option value="table_1">Table 1</option>
+            <option value="table_2">Table 2</option>
+            <option value="table_3">Table 3</option>
+        </select> 
+        <button type="button" id="button" onclick="addFunction()">Add to bill</button>
+    </form><br><br>
+
+    <h2>Order Details</h2>
+
+    <h3>Table 1</h3>
+    <ul id="table_1"></ul>
+    
+    <h3>Table 2</h3>
+    <ul id="table_2"></ul>
+    
+    <h3>Table 3</h3>
+    <ul id="table_3"></ul>
+
+    <script src="restaurant.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"> </script>
+
+</body>
+</html>
+
+
