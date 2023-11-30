@@ -1,51 +1,51 @@
-window.addEventListener("DOMContentLoaded", ()=>{
+window.addEventListener("DOMContentLoaded", async ()=>{
     
-    function getDeleteButton(obj) {
+    async function getDeleteButton(obj) {
         var deleteBtn = document.createElement('button');
         deleteBtn.id = 'delete_' + obj._id;
+        
         deleteBtn.appendChild(document.createTextNode('Delete'));
 
-        deleteBtn.addEventListener('click', function (){
-            axios.delete("https://crudcrud.com/api/f807c5761b84407aa184a2f26bb8b149/orders/" + obj._id)
-            .then((res)=>{
+        deleteBtn.addEventListener('click',async function (){
+            try{
+            await axios.delete("https://crudcrud.com/api/cc3fbae388a846bdb8b6f36043e9f3a2/orders/" + obj._id)
                 deleteBtn.parentElement.remove();
-            })
-            .catch((err)=>{
+            }
+            catch(err){
                 console.error(err);
-            })
+            }
         })
 
         return deleteBtn;
     }
 
-    function getTableRow(obj) {
+    async function getTableRow(obj) {
         var li = document.createElement('li');
         var text = "Price : " + obj.price + "," +  " Dish Ordered : " + obj.dish + "," + " Table : " + obj.table;
         li.textContent = text;
         li.id = 'row_' + obj._id;
-        li.appendChild(getDeleteButton(obj));
+        li.appendChild(await getDeleteButton(obj));
         return li;
     }
 
-    function display(obj){
+   async function display(obj){
         var x = document.querySelector("#"+obj.table);
-        x.appendChild(getTableRow(obj));
+        x.appendChild(await getTableRow(obj));
     }
     
-    axios.get("https://crudcrud.com/api/f807c5761b84407aa184a2f26bb8b149/orders")
-    .then((res)=>{
-        res.data.forEach((obj)=>{
-          display(obj);  
+    try{
+        const res = await axios.get("https://crudcrud.com/api/cc3fbae388a846bdb8b6f36043e9f3a2/orders")
+        res.data.forEach(async (obj)=>{
+          await display(obj);  
         })
-    })
-    .catch((err)=>{
+    }catch(err){
         console.error(err);
-    })  
+    } 
 })
 
 
 
-function addFunction(){
+async function addFunction(){
 
     var li = document.createElement('li');  
 
@@ -59,29 +59,27 @@ function addFunction(){
     deleteBtn.id = 'deleteButton';
     deleteBtn.appendChild(document.createTextNode('Delete'));
 
-    axios.post("https://crudcrud.com/api/f807c5761b84407aa184a2f26bb8b149/orders", obj)
-    .then((res)=>{
-        showOutput(res);
-    })
-    .catch((err)=>{
+    try{
+        const res = await axios.post("https://crudcrud.com/api/cc3fbae388a846bdb8b6f36043e9f3a2/orders", obj)
+        await showOutput(res);
+    } catch(err){
         console.error(err);
-    })
+    }
 
-    function showOutput(param){
+   async function showOutput(param){
         var text = "Price : " + param.data.price + "," +  " Dish Ordered : " + param.data.dish + "," + " Table : " + param.data.table;
         li.textContent = text;
         li.appendChild(deleteBtn);
         var x = document.querySelector("#Category").value;
         document.querySelector('#'+x).appendChild(li);
 
-        deleteBtn.addEventListener('click', function (){
-            axios.delete("https://crudcrud.com/api/f807c5761b84407aa184a2f26bb8b149/orders/" + param.data._id)
-            .then((res)=>{
+        deleteBtn.addEventListener('click', async function (){
+            try {
+                await axios.delete("https://crudcrud.com/api/cc3fbae388a846bdb8b6f36043e9f3a2/orders/" + param.data._id)
                 deleteBtn.parentElement.remove();
-            })
-            .catch((err)=>{
+            } catch(err){
             console.error(err);
-            })
+            }
         })
     }
 
