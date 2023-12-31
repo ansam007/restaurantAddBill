@@ -4,11 +4,11 @@ window.addEventListener("DOMContentLoaded", async ()=>{
         var deleteBtn = document.createElement('button');
         deleteBtn.id = 'delete_' + obj._id;
         
-        deleteBtn.appendChild(document.createTextNode('Delete'));
+        deleteBtn.textContent = 'Delete';
 
         deleteBtn.addEventListener('click',async function (){
             try{
-            await axios.delete("https://crudcrud.com/api/cc3fbae388a846bdb8b6f36043e9f3a2/orders/" + obj._id)
+            await axios.delete("https://crudcrud.com/api/b468af9720af4f2fbf2de00cba5a626e/orders/" + obj._id)
                 deleteBtn.parentElement.remove();
             }
             catch(err){
@@ -34,7 +34,7 @@ window.addEventListener("DOMContentLoaded", async ()=>{
     }
     
     try{
-        const res = await axios.get("https://crudcrud.com/api/cc3fbae388a846bdb8b6f36043e9f3a2/orders")
+        const res = await axios.get("https://crudcrud.com/api/b468af9720af4f2fbf2de00cba5a626e/orders")
         res.data.forEach(async (obj)=>{
           await display(obj);  
         })
@@ -57,10 +57,10 @@ async function addFunction(){
 
     var deleteBtn = document.createElement('button');
     deleteBtn.id = 'deleteButton';
-    deleteBtn.appendChild(document.createTextNode('Delete'));
+    deleteBtn.textContent = 'Delete';
 
     try{
-        const res = await axios.post("https://crudcrud.com/api/cc3fbae388a846bdb8b6f36043e9f3a2/orders", obj)
+        const res = await axios.post("https://crudcrud.com/api/b468af9720af4f2fbf2de00cba5a626e/orders", obj)
         await showOutput(res);
     } catch(err){
         console.error(err);
@@ -75,7 +75,7 @@ async function addFunction(){
 
         deleteBtn.addEventListener('click', async function (){
             try {
-                await axios.delete("https://crudcrud.com/api/cc3fbae388a846bdb8b6f36043e9f3a2/orders/" + param.data._id)
+                await axios.delete("https://crudcrud.com/api/b468af9720af4f2fbf2de00cba5a626e/orders/" + param.data._id)
                 deleteBtn.parentElement.remove();
             } catch(err){
             console.error(err);
